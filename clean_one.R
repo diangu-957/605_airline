@@ -11,5 +11,23 @@ output_file <- args[2]
 
 dt <- fread(input_file, na.strings = c("", "NA"))
 
+keep_vars <- c(
+  "Year", "Month", "DayofMonth", "DayOfWeek", "FlightDate",
+  "CRSDepTime", "CRSArrTime", "CRSElapsedTime",
+  
+  "Operating_Airline", "Origin", "Dest",
+  "OriginState", "DestState", "OriginCityName", "DestCityName",
+  
+  "Distance", "AirTime", "Flights", "Cancelled",
+  
+  "DepDelay", "DepDel15", "ArrDelay",
+  "CarrierDelay", "WeatherDelay", "NASDelay",
+  "SecurityDelay", "LateAircraftDelay"
+)
+
+
+keep_vars <- keep_vars[keep_vars %in% names(dt)]
+dt <- dt[, ..keep_vars]
+
 write.csv(dt, output_file, row.names = FALSE)
 
