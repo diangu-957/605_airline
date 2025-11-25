@@ -10,6 +10,7 @@ input_file  <- args[1]
 output_file <- args[2]
 
 dt <- fread(input_file, na.strings = c("", "NA"))
+setnames(dt, trimws(names(dt)))
 
 keep_vars <- c(
   "Year", "Month", "DayofMonth", "DayOfWeek", "FlightDate",
